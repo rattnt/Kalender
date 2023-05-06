@@ -80,6 +80,9 @@ body {
     background-color: #FFFCFF !important;
     box-shadow: none !important;
   }
+  #newEventModal {
+    display: flex;
+  }
   #newEventModal, #deleteEventModal {
     display: none;
     z-index: 20;

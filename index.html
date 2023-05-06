@@ -9,6 +9,7 @@
   </head>
   <body>
     
+    <!--Skapar divs med id taggar. Jag väljer att ha id tag för att det blir lättare att komma åt med javascript då-->
     <div id="container">
       <div id="header">
         <div id="monthDisplay"></div>
@@ -32,11 +33,39 @@
     </div>
 
     <div id="newEventModal">
-      <h2>New Event</h2>
+      <h2>New booking</h2>
+      
+      <label for="Time">Time: </label>
+      <select name="Time" id="eventTitleTime">
+        <option value="1">13:00</option>
+        <option value="2">14:00</option>
+        <option value="3">15:00</option>
+        <option value="4">16:00</option>
+        <option value="5">17:00</option>
+      </select>
+      
+    <label for="Games">Games: </label>
+      <select name="Games" id="eventTitleGame">
+        <option value="1">Fortnite</option>
+        <option value="2">Overwatch</option>
+        <option value="3">Counter Strike</option>
+        <option value="4">Minecraft 1.8 pvp</option>
+        <option value="5">Minecraft 1.9 pvp</option>
+      </select>
 
-      <input id="eventTitleInput" placeholder="Event Title" />
+    <label for="Coaches">Coaches: </label>
+      <select name="Coaches" id="eventTitleCoach">
+        <option value="1">da_Baykov</option>
+        <option value="2">Rattnt</option>
+        <option value="3">Stero</option>
+        <option value="4">Tritonlord93</option>
+        <option value="5">Ollzzzeeee</option>
+      </select>
+      
+      <!--<input id="eventTitleInput" placeholder="Event Title" />-->
+      
 
-      <button id="saveButton">Save</button>
+      <button id="saveButton" onclick="saveEvent">Save</button>
       <button id="cancelButton">Cancel</button>
     </div>
 

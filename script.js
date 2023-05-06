@@ -6,7 +6,13 @@ const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
 const deleteEventModal = document.getElementById('deleteEventModal');
 const backDrop = document.getElementById('modalBackDrop');
+//----------------------------------------------------------------//
+const eventTitleTime = document.getElementById('eventTitleTime');
+const eventTitleGame = document.getElementById('eventTitleGame');
+const eventTitleCoach = document.getElementById('eventTitleCoach');
+//----------------------------------------------------------------//
 const eventTitleInput = document.getElementById('eventTitleInput');
+//----------------------------------------------------------------//
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function openModal(date) {
@@ -82,29 +88,51 @@ function load() {
 }
 
 function closeModal() {
-  eventTitleInput.classList.remove('error');
+  //eventTitleInput.classList.remove('error');
   newEventModal.style.display = 'none';
   deleteEventModal.style.display = 'none';
   backDrop.style.display = 'none';
-  eventTitleInput.value = '';
+  //eventTitleInput.value = '';
   clicked = null;
   load();
 }
 
 function saveEvent() {
-  if (eventTitleInput.value) {
-    eventTitleInput.classList.remove('error');
+  var time_text = eventTitleTime.options[eventTitleTime.selectedIndex].text;
+  var game_text = eventTitleGame.options[eventTitleGame.selectedIndex].text;
+  var coach_text = eventTitleCoach.options[eventTitleCoach.selectedIndex].text;
 
-    events.push({
-      date: clicked,
-      title: eventTitleInput.value,
-    });
+  events.push({
+    date: clicked,
+    title: game_text + ' with ' + coach_text + ', '  + time_text,
+  })
 
-    localStorage.setItem('events', JSON.stringify(events));
-    closeModal();
-  } else {
-    eventTitleInput.classList.add('error');
-  }
+  
+  localStorage.setItem('events', JSON.stringify(events));
+  closeModal();
+
+  //events.push({
+    //date: clicked,
+    //title: eventTitleInput.value,
+  //});
+
+  //localStorage.setItem('events', JSON.stringify(events));
+  //closeModal();
+
+  //if (eventTitleInput.value) {
+    //eventTitleInput.classList.remove('error');
+
+//    events.push({
+   //   date: clicked,
+    //  title: eventTitleInput.value,
+    //});
+
+    //localStorage.setItem('events', JSON.stringify(events));
+    //closeModal();
+  //} else {
+    //eventTitleInput.classList.add('error');
+//  }
+
 }
 
 function deleteEvent() {
