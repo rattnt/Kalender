@@ -21,7 +21,6 @@
       </div>
 
       <div id="weekdays">
-        
         <div>Sunday</div>
         <div>Monday</div>
         <div>Tuesday</div>
@@ -30,13 +29,14 @@
         <div>Friday</div>
         <div>Saturday</div>
       </div>
-
+      <!--Den här kalendern kommer bli ifylld med hjälp av javascripten-->
       <div id="calendar"></div>
     </div>
-
+    <!--Pop-up rutan när man ska boka eller kolla på sin bokning-->
     <div id="newEventModal">
       <h2>New booking</h2>
       
+      <!--Bokningsalternativ, tider, spel och lärare-->
       <label for="Time">Time: </label>
       <select name="Time" id="eventTitleTime">
         <option value="1">13:00</option>
@@ -63,23 +63,21 @@
         <option value="4">Tritonlord93</option>
         <option value="5">Ollzzzeeee</option>
       </select>
-      
-      <!--<input id="eventTitleInput" placeholder="Event Title" />-->
-      
-
+            
+      <!--Knappar för att spara bokningen eller gå tillbaka till kalendern-->
       <button id="saveButton" onclick="saveEvent">Save</button>
       <button id="cancelButton">Cancel</button>
     </div>
 
     <div id="deleteEventModal">
       <h2>Booking</h2>
-
+      <!--Den här blir ifylld med de valda alternativen-->
       <p id="eventText"></p>
 
       <button id="deleteButton">Delete</button>
       <button id="closeButton">Close</button>
     </div>
-
+    <!--Tonad bakgrund när en bokning sker-->
     <div id="modalBackDrop"></div>
 
     <script src="./script.js"></script>

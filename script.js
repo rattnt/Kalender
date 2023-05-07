@@ -2,34 +2,43 @@ let nav = 0;
 let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
+//Deklarerar konstanter för kalendern, tonad bakgrund och pop-up
 const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
 const deleteEventModal = document.getElementById('deleteEventModal');
 const backDrop = document.getElementById('modalBackDrop');
-//----------------------------------------------------------------//
+//Deklarerar konstanter för de alternativ som går att välja
 const eventTitleTime = document.getElementById('eventTitleTime');
 const eventTitleGame = document.getElementById('eventTitleGame');
 const eventTitleCoach = document.getElementById('eventTitleCoach');
-//----------------------------------------------------------------//
-const eventTitleInput = document.getElementById('eventTitleInput');
-//----------------------------------------------------------------//
+
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+//Funktion för när man klickar på ett datum, innehåller if-satser som filtrerar det som visas i pop-up
 function openModal(date) {
   clicked = date;
 
-  const eventForDay = events.find(e => e.date === clicked);
+  const clickedDate = new Date(date);
+  const currentTime = new Date(Date.now());
 
-  if (eventForDay) {
-    document.getElementById('eventText').innerText = eventForDay.title;
-    deleteEventModal.style.display = 'block';
-  } else {
-    newEventModal.style.display = 'block';
+  console.log(clickedDate.getTime());
+  console.log(currentTime.getTime());
+
+  if (currentTime < clickedDate) {
+    const eventForDay = events.find(e => e.date === clicked);
+
+    if (eventForDay) {
+      document.getElementById('eventText').innerText = eventForDay.title;
+      deleteEventModal.style.display = 'block';
+    } else {
+      newEventModal.style.display = 'block';
+    }
+  
+    backDrop.style.display = 'block';
   }
-
-  backDrop.style.display = 'block';
 }
 
+//Funktion för kalendern
 function load() {
   const dt = new Date();
 
@@ -87,16 +96,16 @@ function load() {
   }
 }
 
+//Funktion för när man trycker på 'close'
 function closeModal() {
-  //eventTitleInput.classList.remove('error');
   newEventModal.style.display = 'none';
   deleteEventModal.style.display = 'none';
   backDrop.style.display = 'none';
-  //eventTitleInput.value = '';
   clicked = null;
   load();
 }
 
+//Funktion  för när man trycker på 'save'
 function saveEvent() {
   var time_text = eventTitleTime.options[eventTitleTime.selectedIndex].text;
   var game_text = eventTitleGame.options[eventTitleGame.selectedIndex].text;
@@ -110,37 +119,16 @@ function saveEvent() {
   
   localStorage.setItem('events', JSON.stringify(events));
   closeModal();
-
-  //events.push({
-    //date: clicked,
-    //title: eventTitleInput.value,
-  //});
-
-  //localStorage.setItem('events', JSON.stringify(events));
-  //closeModal();
-
-  //if (eventTitleInput.value) {
-    //eventTitleInput.classList.remove('error');
-
-//    events.push({
-   //   date: clicked,
-    //  title: eventTitleInput.value,
-    //});
-
-    //localStorage.setItem('events', JSON.stringify(events));
-    //closeModal();
-  //} else {
-    //eventTitleInput.classList.add('error');
-//  }
-
 }
 
+//Funktion för när man trycker på 'delete'
 function deleteEvent() {
   events = events.filter(e => e.date !== clicked);
   localStorage.setItem('events', JSON.stringify(events));
   closeModal();
 }
 
+//Funktion för att bläddra mellan månader
 function initButtons() {
   document.getElementById('nextButton').addEventListener('click', () => {
     nav++;
